@@ -1,0 +1,52 @@
+{%load static %}
+
+<header class="top-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="{% static 'images/logo.png '%}" alt="" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbars-host">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {% if '/' == request.path %} active {% endif %}"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                    <li class="nav-item {% if 'about' in request.path %}active{% endif %}"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+                    <li class="nav-item {% if 'courses' in request.path %}active{% endif %}"><a class="nav-link" href="{% url 'courses' %}">Courses</a></li>
+                    <li class="nav-item {% if 'personel' in request.path %}active{% endif %}"><a class="nav-link" href="{% url 'personel' %}">Personeller</a></li>
+                    <li class="nav-item {% if 'contact' in request.path %}active{% endif %}"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                   
+                
+                    <li class="nav-item"><a class="nav-link" href="teachers.html">Teachers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+                
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated%}
+                    <li><a class="btn btn-danger mr-2 " href="{% url 'index' %}" >{{user.username}}</a></li>
+                    <li><a class="btn btn-warning mr-2" href="{% url 'userdashboard'%}" ><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+                 
+                    <li><a class="btn btn-warning " href="javascript:{document.getElementById('logout').submit()}" >
+                        <i class="fa fa-sign-out"></i></a>
+                        <form method="POST" action="{% url 'userlogout' %}" id="logout">
+                            {%csrf_token%}
+                            <input type="hidden">
+
+                        </form>
+                    
+                    
+                    </li>
+                   
+                    {%else%}
+                    <li><a class="btn btn-danger mr-2 " href="{% url 'userlogin'%}" >GİRİŞ</a></li>
+                    <li><a class="btn btn-warning mr-2" href="{% url 'userregister'%}" ><i class="fa fa-user-plus"></i>KAYIT OL</a></li>
+                   
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

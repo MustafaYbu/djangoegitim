@@ -1,0 +1,118 @@
+{% extends 'partials/_base.html' %}
+{%load static %}
+
+{%block content %}
+	
+<div class="all-title-box">
+    <div class="container text-center">
+        <h1>ÜRÜNLERİMİZ<span class="m_1">AVCI TARIM HİZMETİYLE.</span></h1>
+    </div>
+</div>
+
+<div id="overviews" class="section wb">
+    <div class="container">
+        <div class="row"> 
+            <div class="col-lg-9 blog-post-single mb-4">
+                <div class="row"> 
+                    {% for kurslarimiz in kurs %}
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="course-item">
+                            <div class="image-blog">
+                                <img src="{{kurslarimiz.image.url}}" alt="" class="img-fluid">
+                            </div>
+                            <div class="course-br">
+                                <div class="course-title">
+                                    <h2><a href="{% url 'course_detail' kurslarimiz.category.slug kurslarimiz.id %}" title="">{{kurslarimiz.name}}</a></h2>
+                                </div>
+                                <div class="course-desc">
+                                    <p>{{kurslarimiz.description|safe}}</p> </div>
+                               
+                            </div>
+                            <div class="course-meta-bot">
+                                <ul>
+                                    <li><i class="fa fa-calendar" aria-hidden="true"></i>{{kurslarimiz.date|date:"d M Y"}}</li>
+                                    <li><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{kurslarimiz.personel}}</li>
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                   {%endfor %}
+                </div><!-- end row -->	
+              	
+                
+                <hr class="hr3"> 
+                
+            </div><!-- end col -->
+            <div class="col-lg-3 col-12 right-single">
+                <div class="widget-search">
+                    <div class="site-search-area">
+                        <form method="get" id="site-searchform" action="{% url 'arama'%}">
+                            <div>
+                                <input class="input-text form-control" name="search"placeholder="Kurs  ..." type="text">
+                                <input id="searchsubmit" value="Search" type="submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="widget-categories">
+                    <h3 class="widget-title">ÜRÜN KATEGORİLERİMİZ</h3>
+                    <ul>
+                        {% for kategori in kategori%}
+                        <li><a href="{% url 'course_by_category' kategori.slug%}">{{kategori.name}}</a></li>
+                       {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget-tags">
+                    <h3 class="widget-title">ETİKET</h3>
+                    <ul class="tags">
+                        {% for tag in taglarimiz%}
+                        <li> <a href="{% url 'course_by_tag' tag.slug %}">
+                            {% if tag.slug in request.path %}
+                             <b>{{tag.name}}</b>
+                            {% else %}
+                            {{tag.name}}
+                            {%endif%}
+                            </a>
+                           
+                           
+                       
+                           
+                            
+                       
+                           
+                        </li>
+                       {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end section -->
+
+<div class="parallax section dbcolor">
+    <div class="container">
+        <div class="row logos">
+            <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                <a href="#"><img src="images/logo_01.png" alt="" class="img-repsonsive"></a>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                <a href="#"><img src="images/logo_02.png" alt="" class="img-repsonsive"></a>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                <a href="#"><img src="images/logo_03.png" alt="" class="img-repsonsive"></a>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                <a href="#"><img src="images/logo_04.png" alt="" class="img-repsonsive"></a>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                <a href="#"><img src="images/logo_05.png" alt="" class="img-repsonsive"></a>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                <a href="#"><img src="images/logo_06.png" alt="" class="img-repsonsive"></a>
+            </div>
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end section -->
+
+  {% endblock content %}
